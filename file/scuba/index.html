@@ -1,0 +1,139 @@
+<?php
+// We need to use sessions, so you should always start sessions using the below code.
+session_start();
+// If the user is not logged in redirect to the login page...
+if (!isset($_SESSION['loggedin'])) {
+	header('Location: ../index.html');
+	exit();
+    }
+    $DATABASE_HOST = 'localhost';
+    $DATABASE_USER = 'robert23';
+    $DATABASE_PASS = 'Queen@2468';
+    $DATABASE_NAME = 'phplogin';
+    $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+    if (mysqli_connect_errno()) {
+      die ('Failed to connect to MySQL: ' . mysqli_connect_error());
+    }
+    // We don't have the password or email info stored in sessions so instead we can get the results from the database.
+    $stmt = $con->prepare('SELECT password, email FROM accounts WHERE id = ?');
+    // In this case we can use the account ID to get the account info.
+    $stmt->bind_param('s', $_SESSION['id']);
+    $stmt->execute();
+    $stmt->bind_result($password, $email);
+    $stmt->fetch();
+    $stmt->close();
+    ?>
+    <?php
+
+    // login into the the image location.
+    $hostname = "localhost";
+    $username = "robert23";
+    $password = "Queen@2468";
+    $dbname = "testingParking";
+
+
+    $conn = new mysqli($hostname, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    //Connected, and to add the data
+
+    if (isset($_POST["insert"])) {
+
+      $file = addslashes(file_get_contents($_FILES["testingParking"]["tmp_name"]));
+      $file2 = $_POST['comment'];
+      $query = "INSERT INTO tb_image(name, comment) VALUES ('$file', '$file2')";
+      if (mysqli_query($conn, $query)) {
+      echo '<script>alert("Image inserted into database"</script>';
+      }
+    }
+?>
+<!-- The actual site --> 
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.9.0/css/all.css">
+  </head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="scuba.css">
+    <title>Scuba Tour</title>
+  </head>
+  <body>
+
+      <nav class="navbar navbar-dark" id="topcolor">
+        <div class="container">
+          <a href="#" class="navbar-brand"><i class="fas fa-water mr-3"></i>SCUBAE TOUR</a>
+        </div>  
+      </nav>
+          <section id="header" class="jumbotron text-center">
+            <h1 class="display-3">Scuba Diving Tours</h1>
+            <p class="lead">Amy and Robert would like to help you run your scuba tour!!!  
+              All you need to be thinking about is diving,
+              we will concentrate on the details....
+            </p>
+            <a href="" class="btn btn-primary">Sign up</a>
+            <a href="" class="btn btn-success">Contact us</a>
+          </section>
+
+          <section id="gallery">
+            <div class="container">
+                <div class="card-deck">
+                    <div class="card">
+                      <img src="https://images.unsplash.com/photo-1487252333087-c353573e2b7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">Dive with Sharks</h5>
+                          <p class="card-text">Want to learn and experiecne abit sharks?  Dive in Belize...</p>
+                          <a href="https://www.youtube.com/watch?v=PTbySm4leV4" target="_blank" class="btn btn-outline-success btn-sm">Watch it.</a>
+                        <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                      </div>
+
+                    </div>
+                    <div class="card">
+                      <img src="https://images.unsplash.com/photo-1555902109-104d02431631?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">Dive with Sharks</h5>
+                          <p class="card-text">Want to learn and experiecne abit sharks?  Dive in Belize...</p>
+                          <a href="https://www.youtube.com/watch?v=G6t6vvhEboU&list=UU7Vb9HZotnM4XUv9UXxTlfg" target="_blank" class="btn btn-outline-success btn-sm">Watch it.</a>
+                        <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                      </div>
+
+                    </div>
+                    <div class="card">
+                      <img src="https://images.unsplash.com/photo-1533787896899-91b040188f57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1440&q=80" class="card-img-top" alt="...">
+                      <div class="card-body">
+                          <h5 class="card-title">Dive with Sharks</h5>
+                          <p class="card-text">Want to learn and experiecne abit sharks?  Dive in Belize...</p>
+                          <a href="" class="btn btn-outline-success btn-sm">Watch it.</a>
+                        <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- another set fot 3 -->
+                  
+          </section>
+          
+          <div class="container">
+              <div class="row">
+                  <div class="col-sm-6">
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae, provident? Voluptatem perspiciatis corporis voluptatum commodi adipisci totam quae facilis officiis.</p>
+                  </div>
+                </div>
+          </div>
+          <footer class="page-footer font-small pt-4">
+            <div class="container text-center">
+              <h5><i class="fas fa-shoe-prints mr-3"></i>This is the Footer</h5>
+            </div>
+          </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

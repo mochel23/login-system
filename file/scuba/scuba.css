@@ -1,0 +1,18 @@
+#header {
+    /* background: url(https://images.unsplash.com/photo-1459743421941-c1caaf5a232f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80)
+    center center / cover no-repeat; */
+    background: url(https://images.unsplash.com/photo-1459743421941-c1caaf5a232f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80)
+    center;
+    
+
+  } 
+  #topcolor {
+    background-color: rgb(41, 169, 219); 
+  }
+  footer {
+    background-color: rgb(41, 169, 219);
+    padding-bottom: 1rem;
+  }
+  body {
+    background-color: rgb(138, 193, 214);
+  }
